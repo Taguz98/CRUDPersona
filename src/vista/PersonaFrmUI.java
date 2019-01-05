@@ -209,7 +209,7 @@ public class PersonaFrmUI extends javax.swing.JFrame {
         btnGuardar.setOpaque(true);
         pnlPrincipal.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 90, 30));
 
-        jScrollPane1.setBackground(new java.awt.Color(51, 0, 255));
+        jScrollPane1.setBorder(null);
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));

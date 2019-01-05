@@ -5,6 +5,8 @@
  */
 package controlador;
 
+import vista.PersonaElimUI;
+import vista.PersonaFrmUI;
 import vista.PersonaUI;
 
 /**
@@ -22,14 +24,32 @@ public class PersonaCTR {
     
     public void iniciar(){ 
         
+        //Le daremos funcionamiento a los botones  
+        vtnPersona.getBtnNuevo().addActionListener(e -> nueva());
+        vtnPersona.getBtnEditar().addActionListener(e -> editar());
+        vtnPersona.getBtnEliminar().addActionListener(e -> eliminar()); 
     }
     
-    public void nuevaPersona(){
+    //Con este metodo iniciaremos el controlador para ingresar una nueva persona
+    public void nueva(){
+        PersonaFrmUI frmPer = new PersonaFrmUI(); 
+        NuevaCTR nv = new NuevaCTR(frmPer, vtnPersona);
+        nv.iniciar();
+    }
+    
+    //Con este metodo eliminaremos a la persona seleccionada 
+    public void eliminar(){ 
+        PersonaElimUI elimPer = new PersonaElimUI(); 
+        EliminarCTR elm = new EliminarCTR(elimPer, vtnPersona);
+        elm.iniciar();
         
     }
     
-    public void eliminarPersona(){ 
-        
+    //Con este metodo editaremos a la persona selecciona
+    public void editar(){
+        PersonaFrmUI frmPer = new PersonaFrmUI(); 
+        EditarCTR ed = new EditarCTR(frmPer, vtnPersona); 
+        ed.iniciar();
     }
     
     

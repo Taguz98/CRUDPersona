@@ -5,10 +5,34 @@
  */
 package controlador;
 
+import vista.PersonaElimUI;
+import vista.PersonaUI;
+
 /**
  *
  * @author Usuario
  */
 public class EliminarCTR {
+    
+    private final PersonaElimUI elimPersona; 
+    private final PersonaUI vtnPersona; 
+    
+    public EliminarCTR(PersonaElimUI elimPersona, PersonaUI vtnPersona){ 
+        this.elimPersona = elimPersona; 
+        this.vtnPersona = vtnPersona; 
+        
+        vtnPersona.setEnabled(false);
+        elimPersona.setVisible(true); 
+    }
+    
+    public void iniciar(){
+        elimPersona.getBtnCancelar().addActionListener(e -> cancelar());
+    }
+    
+    public void cancelar(){ 
+        
+        vtnPersona.setEnabled(true); 
+        elimPersona.dispose();
+    }
     
 }
