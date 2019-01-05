@@ -5,6 +5,8 @@
  */
 package controlador;
 
+import modelo.estilo.BtnHover;
+import modelo.estilo.VtnBorde;
 import vista.PersonaElimUI;
 import vista.PersonaFrmUI;
 import vista.PersonaUI;
@@ -23,6 +25,14 @@ public class PersonaCTR {
     }
     
     public void iniciar(){ 
+        //Le pasamos las animaciones a todos los botones 
+        vtnPersona.getBtnActualizar().addMouseListener(new BtnHover(vtnPersona.getBtnActualizar()));
+        vtnPersona.getBtnEditar().addMouseListener(new BtnHover(vtnPersona.getBtnEditar()));
+        vtnPersona.getBtnEliminar().addMouseListener(new BtnHover(vtnPersona.getBtnEliminar()));
+        vtnPersona.getBtnNuevo().addMouseListener(new BtnHover(vtnPersona.getBtnNuevo()));
+        
+        //Le agregamos la animacion del borde de la ventana
+        vtnPersona.addWindowFocusListener(new VtnBorde(vtnPersona.getPnlFondo()));
         
         //Le daremos funcionamiento a los botones  
         vtnPersona.getBtnNuevo().addActionListener(e -> nueva());

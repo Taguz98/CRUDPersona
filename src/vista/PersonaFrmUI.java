@@ -104,6 +104,10 @@ public class PersonaFrmUI extends javax.swing.JFrame {
     public JRadioButton getBtnrMasculino() {
         return btnrMasculino;
     }
+
+    public JPanel getPnlFondo() {
+        return pnlFondo;
+    }
     
     
 
@@ -117,6 +121,7 @@ public class PersonaFrmUI extends javax.swing.JFrame {
     private void initComponents() {
 
         btngSexo = new javax.swing.ButtonGroup();
+        pnlFondo = new javax.swing.JPanel();
         pnlHeader = new javax.swing.JPanel();
         lblTituloVtn = new javax.swing.JLabel();
         pnlPrincipal = new javax.swing.JPanel();
@@ -152,9 +157,16 @@ public class PersonaFrmUI extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(302, 402));
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(302, 402));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        pnlFondo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(24, 131, 215), 3));
+        pnlFondo.setMinimumSize(new java.awt.Dimension(302, 402));
+        pnlFondo.setPreferredSize(new java.awt.Dimension(302, 402));
+        pnlFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlHeader.setBackground(new java.awt.Color(27, 49, 71));
         pnlHeader.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -175,7 +187,7 @@ public class PersonaFrmUI extends javax.swing.JFrame {
         lblTituloVtn.setText("Ingreso");
         pnlHeader.add(lblTituloVtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 70, 30));
 
-        getContentPane().add(pnlHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 30));
+        pnlFondo.add(pnlHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 300, 30));
 
         pnlPrincipal.setBackground(new java.awt.Color(255, 255, 255));
         pnlPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -332,7 +344,9 @@ public class PersonaFrmUI extends javax.swing.JFrame {
 
         pnlPrincipal.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 310));
 
-        getContentPane().add(pnlPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 300, 370));
+        pnlFondo.add(pnlPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 31, 300, 370));
+
+        getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 302, 402));
 
         pack();
         setLocationRelativeTo(null);
@@ -353,40 +367,6 @@ public class PersonaFrmUI extends javax.swing.JFrame {
         mouseY = evt.getY();
     }//GEN-LAST:event_pnlHeaderMousePressed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PersonaFrmUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PersonaFrmUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PersonaFrmUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PersonaFrmUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new PersonaFrmUI().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
@@ -413,6 +393,7 @@ public class PersonaFrmUI extends javax.swing.JFrame {
     private javax.swing.JLabel lblErrorSueldo;
     private javax.swing.JLabel lblErrorTelefono;
     private javax.swing.JLabel lblTituloVtn;
+    private javax.swing.JPanel pnlFondo;
     private javax.swing.JPanel pnlHeader;
     private javax.swing.JPanel pnlPrincipal;
     private javax.swing.JTextField txtAnio;

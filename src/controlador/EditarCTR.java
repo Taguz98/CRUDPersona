@@ -1,5 +1,6 @@
 package controlador;
 
+import modelo.estilo.BtnHover;
 import vista.PersonaFrmUI;
 import vista.PersonaUI;
 
@@ -21,7 +22,23 @@ public class EditarCTR {
     }
     
     public void iniciar(){ 
-         frmPersona.getBtnCancelar().addActionListener(e -> cancelar());
+        //Le pasamos todas las animaciones alos btns de esta ventana 
+        frmPersona.getBtnCancelar().addMouseListener(new BtnHover(frmPersona.getBtnCancelar())); 
+        frmPersona.getBtnGuardar().addMouseListener(new BtnHover(frmPersona.getBtnGuardar()));  
+        
+        ocultarLbl();
+        
+        frmPersona.getBtnCancelar().addActionListener(e -> cancelar());
+    }
+    
+    public void ocultarLbl(){ 
+        //Oculatamos todos los lbl de error
+        frmPersona.getLblErrorApellido().setVisible(false);
+        frmPersona.getLblErrorCedula().setVisible(false);
+        frmPersona.getLblErrorFechaNac().setVisible(false);
+        frmPersona.getLblErrorNombre().setVisible(false);
+        frmPersona.getLblErrorSueldo().setVisible(false);
+        frmPersona.getLblErrorTelefono().setVisible(false);
     }
     
     public void cancelar(){ 

@@ -5,6 +5,8 @@
  */
 package controlador;
 
+import modelo.estilo.BtnHover;
+import modelo.estilo.VtnBorde;
 import vista.PersonaElimUI;
 import vista.PersonaUI;
 
@@ -26,6 +28,13 @@ public class EliminarCTR {
     }
     
     public void iniciar(){
+        //Agregamos las animaciones a los btns  
+        elimPersona.getBtnCancelar().addMouseListener(new BtnHover(elimPersona.getBtnCancelar()));
+        elimPersona.getBtnContinuar().addMouseListener(new BtnHover(elimPersona.getBtnContinuar()));
+        
+        //Le agregamos la animacion del borde a la ventana 
+        elimPersona.addWindowFocusListener(new VtnBorde(elimPersona.getPnlFondo()));
+        
         elimPersona.getBtnCancelar().addActionListener(e -> cancelar());
     }
     
