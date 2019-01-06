@@ -42,7 +42,7 @@ public class EliminarCTR {
         
         //Le agregamos los nombres a la ventana  
         persona = persona.consultaPersona(id); 
-        elimPersona.getLblMensaje().setText("Se eliminara a "+persona.getNombre()+" "+persona.getApellido()+"."); 
+        elimPersona.getLblMensaje().setText("Se eliminará a "+persona.getNombre()+" "+persona.getApellido()+"."); 
         
         elimPersona.getBtnCancelar().addActionListener(e -> cancelar());
         elimPersona.getBtnContinuar().addActionListener(e -> continuar());
@@ -51,10 +51,10 @@ public class EliminarCTR {
     public void continuar(){ 
         if (persona.eliminarPersona(id)) {
             vtnPersona.setEnabled(true);
-            vtnPersona.getLblMensaje().setText("Se elimino a "+persona.getNombre()+" "+persona.getApellido()+" correctamente.");
+            vtnPersona.getLblMensaje().setText("Se eliminó a "+persona.getNombre()+" "+persona.getApellido()+", correctamente.");
             elimPersona.dispose();
         }else{
-            vtnPersona.getLblMensaje().setText("No se pudo eliminar a "+persona.getNombre()+" "+persona.getApellido()+" correctamente.");
+            vtnPersona.getLblMensaje().setText("No se pudo eliminar a "+persona.getNombre()+" "+persona.getApellido()+", correctamente.");
         }
     }
     

@@ -161,13 +161,12 @@ public class PersonaUI extends javax.swing.JFrame {
         lblMensaje.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         lblMensaje.setForeground(new java.awt.Color(255, 255, 255));
         lblMensaje.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblMensaje.setText("Mensaje de confirmacion.");
         lblMensaje.setOpaque(true);
         pnlPrincipal.add(lblMensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 620, 30));
 
         txtBuscar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtBuscar.setForeground(new java.awt.Color(51, 51, 51));
-        txtBuscar.setText("Busqueda");
+        txtBuscar.setText("Búsqueda");
         pnlPrincipal.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 210, 30));
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -233,6 +232,8 @@ public class PersonaUI extends javax.swing.JFrame {
         btnEliminar.setOpaque(true);
         pnlPrincipal.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 50, 90, 30));
 
+        scrollTblPersona.setBackground(new java.awt.Color(255, 255, 255));
+
         tblPersonas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -241,6 +242,7 @@ public class PersonaUI extends javax.swing.JFrame {
                 "Cedula", "Nombre", "Apellido"
             }
         ));
+        tblPersonas.setSelectionBackground(new java.awt.Color(65, 87, 108));
         scrollTblPersona.setViewportView(tblPersonas);
 
         pnlPrincipal.add(scrollTblPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 620, 310));

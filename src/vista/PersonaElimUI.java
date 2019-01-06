@@ -69,7 +69,6 @@ public class PersonaElimUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(302, 152));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(302, 152));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -94,8 +93,8 @@ public class PersonaElimUI extends javax.swing.JFrame {
         lblTituloVtn.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblTituloVtn.setForeground(new java.awt.Color(255, 255, 255));
         lblTituloVtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblTituloVtn.setText("Eliminar");
-        pnlHeader.add(lblTituloVtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 70, 30));
+        lblTituloVtn.setText("Eliminar registro");
+        pnlHeader.add(lblTituloVtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 120, 30));
 
         pnlFondo.add(pnlHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 300, 30));
 
@@ -109,7 +108,7 @@ public class PersonaElimUI extends javax.swing.JFrame {
 
         lblMensaje.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblMensaje.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblMensaje.setText("Se eliminara a NOMBRE APELLIDO");
+        lblMensaje.setText("Se eliminará a NOMBRE APELLIDO");
         pnlPrincipal.add(lblMensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 280, 30));
 
         btnCancelar.setBackground(new java.awt.Color(66, 88, 110));

@@ -1,8 +1,11 @@
 package controlador;
 
+import java.awt.Color;
 import java.time.LocalDate;
+import javax.swing.BorderFactory;
 import modelo.PersonaDB;
 import modelo.estilo.BtnHover;
+import modelo.validaciones.Validar;
 import vista.PersonaFrmUI;
 import vista.PersonaUI;
 
@@ -24,7 +27,7 @@ public class EditarCTR {
         this.id = id;
 
         frmPersona.setVisible(true);
-        frmPersona.getLblTituloVtn().setText("Editar");
+        frmPersona.getLblTituloVtn().setText("Editar registro");
         vtnPersona.setEnabled(false);
     }
 
@@ -43,7 +46,6 @@ public class EditarCTR {
     }
 
     public void cargarFormulario() {
-        System.out.println("Estes es el id "+id);
         persona = persona.consultaPersona(id);
         if (persona != null) {
             frmPersona.getTxtAnio().setText(persona.getFechaNacimiento().getYear()+""); 
@@ -66,81 +68,122 @@ public class EditarCTR {
         } 
     }
     
-    public void guardar(){ 
-        boolean guardar = true; 
-        String anio = frmPersona.getTxtAnio().getText(); 
-        String apellido = frmPersona.getTxtApellido().getText(); 
-        String cedula = frmPersona.getTxtCedula().getText(); 
-        String dia = frmPersona.getTxtDia().getText(); 
-        String mes = frmPersona.getTxtMes().getText(); 
+ public void guardar() {
+        boolean guardar = true;
+        String anio = frmPersona.getTxtAnio().getText();
+        String apellido = frmPersona.getTxtApellido().getText();
+        String cedula = frmPersona.getTxtCedula().getText();
+        String dia = frmPersona.getTxtDia().getText();
+        String mes = frmPersona.getTxtMes().getText();
         String nombre = frmPersona.getTxtNombre().getText();
-        String sueldo = frmPersona.getTxtSueldo().getText(); 
-        String telefono = frmPersona.getTxtTelefono().getText(); 
-        char sexo; 
-        
+        String sueldo = frmPersona.getTxtSueldo().getText();
+        String telefono = frmPersona.getTxtTelefono().getText();
+        char sexo;
+
         if (frmPersona.getBtnrFemenino().isSelected()) {
-            sexo = 'F'; 
-        }else{
+            sexo = 'F';
+        } else {
             sexo = 'M';
         }
-        
-        if (anio.length() == 0) {
-            guardar = false; 
-        }
-        
-        if (apellido.length() == 0) {
+
+        if (!Validar.esAnio(anio)) {
             guardar = false;
+            frmPersona.getLblErrorFechaNac().setVisible(true);
+            frmPersona.getTxtAnio().setBorder(BorderFactory.createLineBorder(new Color(170, 0, 0), 1));
+        }else{
+            frmPersona.getTxtAnio().setBorder(BorderFactory.createLineBorder(new Color(171, 173, 179), 1));
         }
-        
-        if (cedula.length() == 0) {
+
+        if (!Validar.esLetras(apellido)) {
             guardar = false;
+            frmPersona.getLblErrorApellido().setVisible(true);
+            frmPersona.getTxtApellido().setBorder(BorderFactory.createLineBorder(new Color(170, 0, 0), 1));
+        }else{
+            frmPersona.getTxtApellido().setBorder(BorderFactory.createLineBorder(new Color(171, 173, 179), 1));
         }
-        
-        if (dia.length() == 0) {
+
+        if (!Validar.esCedula(cedula)) {
             guardar = false;
+            frmPersona.getLblErrorCedula().setVisible(true);
+            frmPersona.getTxtCedula().setBorder(BorderFactory.createLineBorder(new Color(170, 0, 0), 1));
+        }else{
+            frmPersona.getTxtCedula().setBorder(BorderFactory.createLineBorder(new Color(171, 173, 179), 1));
         }
-        
-        if (mes.length() == 0) {
+
+        if (!Validar.esDia(dia)) {
             guardar = false;
+            frmPersona.getLblErrorFechaNac().setVisible(true);
+            frmPersona.getTxtDia().setBorder(BorderFactory.createLineBorder(new Color(170, 0, 0), 1));
+        }else{
+            frmPersona.getTxtDia().setBorder(BorderFactory.createLineBorder(new Color(171, 173, 179), 1));
         }
-        
-        if (nombre.length() == 0) {
+
+        if (!Validar.esMes(mes)) {
             guardar = false;
+            frmPersona.getLblErrorFechaNac().setVisible(true);
+            frmPersona.getTxtMes().setBorder(BorderFactory.createLineBorder(new Color(170, 0, 0), 1));
+        }else{
+            frmPersona.getTxtMes().setBorder(BorderFactory.createLineBorder(new Color(171, 173, 179), 1));
         }
-        
-        if (sueldo.length() == 0) {
+
+        if (!Validar.esLetras(nombre)) {
             guardar = false;
+            frmPersona.getLblErrorNombre().setVisible(true);
+            frmPersona.getTxtNombre().setBorder(BorderFactory.createLineBorder(new Color(170, 0, 0), 1));
+        }else{
+            frmPersona.getTxtNombre().setBorder(BorderFactory.createLineBorder(new Color(171, 173, 179), 1));
         }
-        
-        if (telefono.length() == 0) {
+
+        if (!Validar.esDinero(sueldo)) {
             guardar = false;
+            frmPersona.getLblErrorSueldo().setVisible(true);
+            frmPersona.getTxtSueldo().setBorder(BorderFactory.createLineBorder(new Color(170, 0, 0), 1));
+        }else{
+            frmPersona.getTxtSueldo().setBorder(BorderFactory.createLineBorder(new Color(171, 173, 179), 1));
+        }
+
+        if (!Validar.esTelefono(telefono)) {
+            guardar = false;
+            frmPersona.getLblErrorTelefono().setVisible(true);
+            frmPersona.getTxtTelefono().setBorder(BorderFactory.createLineBorder(new Color(170, 0, 0), 1));
+        }else{
+            frmPersona.getTxtTelefono().setBorder(BorderFactory.createLineBorder(new Color(171, 173, 179), 1));
         }
         
+        LocalDate fn = null;
+        if (Validar.esAnio(anio) && Validar.esDia(dia) && Validar.esMes(mes)) {
+            try {
+                fn = LocalDate.of(Integer.parseInt(anio), Integer.parseInt(mes), Integer.parseInt(dia));
+            } catch (NumberFormatException e) {
+                System.out.println("No se pudo transformar la fecha");
+                guardar = false; 
+                frmPersona.getLblErrorFechaNac().setVisible(true); 
+            }  
+        }
+        
+
         //Si no existe ningun error guardamos
         if (guardar) {
-            
+
             persona.setApellido(apellido);
             persona.setCedula(cedula);
-            LocalDate fn = LocalDate.of(Integer.parseInt(anio), Integer.parseInt(mes), Integer.parseInt(dia));
+            
             persona.setFechaNacimiento(fn);
             persona.setNombre(nombre);
             persona.setSexo(sexo);
-            persona.setSueldo(Double.parseDouble(sueldo)); 
+            persona.setSueldo(Double.parseDouble(sueldo));
             persona.setTelefono(telefono);
             //Guardamos la personas en base de datos
             //Si se guardao enviamos el mensaje de guardado y cerramos la ventana 
-            if(persona.editarPersona(id)){
-                vtnPersona.setEnabled(true); 
-                vtnPersona.getLblMensaje().setText("Se edito a "+persona.getNombre()+" "+persona.getApellido()+" correctamente.");
-                frmPersona.dispose(); 
-            }else{
-                vtnPersona.getLblMensaje().setText("No se pudo editar a "+persona.getNombre()+" "+persona.getApellido()+" correctamente.");
+            if (persona.guardarPersona()) {
+                vtnPersona.setEnabled(true);
+                vtnPersona.getLblMensaje().setText("Se editó a " + persona.getNombre() + " " + persona.getApellido() + ", correctamente.");
+                frmPersona.dispose();
+            } else {
+                vtnPersona.getLblMensaje().setText("No se pudo editar a " + persona.getNombre() + " " + persona.getApellido() + ", correctamente.");
             };
-            
-            
         }
     }
-
     public void ocultarLbl() {
         //Oculatamos todos los lbl de error
         frmPersona.getLblErrorApellido().setVisible(false);

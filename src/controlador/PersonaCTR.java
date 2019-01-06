@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import modelo.PersonaDB;
 import modelo.PersonaMD;
 import modelo.estilo.BtnHover;
+import modelo.estilo.TblEstilo;
 import modelo.estilo.VtnBorde;
 import vista.PersonaElimUI;
 import vista.PersonaFrmUI;
@@ -29,6 +30,8 @@ public class PersonaCTR {
     private final PersonaDB persona;
     //El modelo de la tabla personas 
     private DefaultTableModel mdTblPersona;
+    //Aqui guardamos todas las personas de nuestra base de datos 
+    private ArrayList<PersonaMD> personas;
 
     public PersonaCTR(PersonaUI vtnPersona, PersonaDB persona) {
         this.vtnPersona = vtnPersona;
@@ -39,11 +42,17 @@ public class PersonaCTR {
 
     public void iniciar() {
         //Inciamos el modelo de tabla personas 
-        String titulo[] = {"id", "Cedula", "Nombre", "Apellido", "Sueldo", "Sexo"};
+        String titulo[] = {"id", "Cédula", "Nombre", "Apellido", "Sueldo", "Sexo", "Teléfono", "Fecha N"};
         String datos[][] = {};
         mdTblPersona = new DefaultTableModel(datos, titulo);
         //Le pasamos el modelo a la tabla  
         vtnPersona.getTblPersonas().setModel(mdTblPersona);
+        //Ocultamos el id de la tabla  
+        TblEstilo.ocultarID(vtnPersona.getTblPersonas());
+        //Le pasamos el estilo del titulo de la tabla 
+        TblEstilo.tituloTbl(vtnPersona.getTblPersonas());
+        //Le pasamos el estilo de las letras de la tabala 
+        TblEstilo.letrasTbl(vtnPersona.getTblPersonas());
 
         //Le pasamos las animaciones a todos los botones 
         vtnPersona.getBtnActualizar().addMouseListener(new BtnHover(vtnPersona.getBtnActualizar()));
@@ -73,12 +82,41 @@ public class PersonaCTR {
         };
         //Le asignamos el escucha al txt buscar  
         vtnPersona.getTxtBuscar().addKeyListener(kl);
+        vtnPersona.getTxtBuscar().addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                vtnPersona.getTxtBuscar().setText("");
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                vtnPersona.getTxtBuscar().setText("");
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                 
+            }
+        });
 
         //Le daremos funcionamiento a los botones  
         vtnPersona.getBtnNuevo().addActionListener(e -> nueva());
         vtnPersona.getBtnEditar().addActionListener(e -> editar());
         vtnPersona.getBtnEliminar().addActionListener(e -> eliminar());
         vtnPersona.getBtnActualizar().addActionListener(e -> cargarPersonas());
+
+        //Le pasamos funcionalidad al combo  
+        vtnPersona.getCbFiltro().addActionListener(e -> ordenar());
 
         MouseListener ml = new MouseListener() {
             @Override
@@ -123,20 +161,73 @@ public class PersonaCTR {
     }
 
     public void cargarPersonas() {
-        mdTblPersona.setRowCount(0);
-        ArrayList<PersonaMD> personas = persona.cargarPersonas();
+        personas = persona.cargarPersonas();
         //Cargamos todos los datos a la tabla personas 
-        for (PersonaMD per : personas) {
-            Object valores[] = {per.getId(), per.getCedula(), per.getNombre(),
-                per.getApellido(), per.getSueldo(), per.getSexo()};
-            mdTblPersona.addRow(valores);
+        if (personas != null) {
+            llenarTblPersonas(personas);
         }
     }
 
     public void buscar(String aguja) {
+        personas = persona.cargarPersonas(aguja);
+        //Cargamos todos los datos a la tabla 
+        if (personas != null) {
+            llenarTblPersonas(personas);
+        }
+    }
+
+    public void ordenar() {
+        String orden = vtnPersona.getCbFiltro().getSelectedItem().toString();
+
+        if (orden.equalsIgnoreCase("nombre")) {
+            ordenarPorNombre();
+        } else if (orden.equalsIgnoreCase("apellido")) {
+            ordenarPorApellido();
+        } else if (orden.equalsIgnoreCase("cedula")) {
+            ordenarPorCedula();
+        }
+    }
+
+    public void ordenarPorNombre() {
+        if (personas != null) {
+            //Ordenamos por nombre
+            mdTblPersona.setRowCount(0);
+            personas.stream().sorted((per1, per2) -> (per1.getNombre().compareTo(per2.getNombre()))).
+                    forEach(per -> {
+                        Object valores[] = {per.getId(), per.getCedula(), per.getNombre(),
+                            per.getApellido(), per.getSueldo(), per.getSexo()};
+                        mdTblPersona.addRow(valores);
+                    });
+        }
+    }
+
+    public void ordenarPorApellido() {
+        if (personas != null) {
+            mdTblPersona.setRowCount(0);
+            personas.stream().sorted((per1, per2) -> (per1.getApellido().compareTo(per2.getApellido()))).
+                    forEach(per -> {
+                        Object valores[] = {per.getId(), per.getCedula(), per.getNombre(),
+                            per.getApellido(), per.getSueldo(), per.getSexo()};
+                        mdTblPersona.addRow(valores);
+                    }); 
+        }
+    }
+
+    public void ordenarPorCedula() {
+        if (personas != null) {
+            mdTblPersona.setRowCount(0);
+            personas.stream().sorted((per1, per2) -> (per1.getCedula().compareTo(per2.getCedula()))).
+                    forEach(per -> {
+                        Object valores[] = {per.getId(), per.getCedula(), per.getNombre(),
+                            per.getApellido(), per.getSueldo(), per.getSexo()};
+                        mdTblPersona.addRow(valores);
+                    });
+        }
+    }
+
+    //Con este meotod llenamos la tabla personas
+    public void llenarTblPersonas(ArrayList<PersonaMD> personas) {
         mdTblPersona.setRowCount(0);
-        ArrayList<PersonaMD> personas = persona.cargarPersonas(aguja);
-        //Cargamos todos los datos a la tabla  
         for (PersonaMD per : personas) {
             Object valores[] = {per.getId(), per.getCedula(), per.getNombre(),
                 per.getApellido(), per.getSueldo(), per.getSexo()};

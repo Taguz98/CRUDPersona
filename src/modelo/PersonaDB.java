@@ -108,7 +108,8 @@ public class PersonaDB extends PersonaMD {
         try {
             String sql = "SELECT id, cedula, nombre, apellido, telefono, sueldo, \"fechaNacimiento\", sexo\n"
                     + "	FROM public.persona "
-                    + "WHERE eliminado = 'false';";
+                    + "WHERE eliminado = 'false' "
+                    + "ORDER BY nombre;";
             ResultSet rs = conect.sql(sql);
 
             while (rs.next()) {
@@ -141,11 +142,11 @@ public class PersonaDB extends PersonaMD {
 
         try {
             String sql = "SELECT id, cedula, nombre, apellido, telefono, sueldo, \"fechaNacimiento\", sexo\n"
-                    + "	FROM public.persona "
-                    + "WHERE eliminado = 'false' AND ("
-                    + "\"cedula\" ILIKE = '%" + aguja + "%' "
-                    + "OR \"nombre\" ILIKE = '%" + aguja + "%'  "
-                    + "OR \"apellido\" ILIKE = '%" + aguja + "%' )";
+                    + "FROM public.persona  "
+                    + "WHERE eliminado = 'false' AND  ("
+                    + "\"cedula\" ILIKE  '%" + aguja + "%' "
+                    + "OR \"nombre\" ILIKE  '%" + aguja + "%'  "
+                    + "OR \"apellido\" ILIKE  '%" + aguja + "%' );";
 
             ResultSet rs = conect.sql(sql);
 

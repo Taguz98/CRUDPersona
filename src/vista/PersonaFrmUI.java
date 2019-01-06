@@ -159,7 +159,6 @@ public class PersonaFrmUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(302, 402));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(302, 402));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -184,8 +183,8 @@ public class PersonaFrmUI extends javax.swing.JFrame {
         lblTituloVtn.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblTituloVtn.setForeground(new java.awt.Color(255, 255, 255));
         lblTituloVtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblTituloVtn.setText("Ingreso");
-        pnlHeader.add(lblTituloVtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 70, 30));
+        lblTituloVtn.setText("Registro de persona");
+        pnlHeader.add(lblTituloVtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 190, 30));
 
         pnlFondo.add(pnlHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 300, 30));
 
@@ -250,12 +249,13 @@ public class PersonaFrmUI extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("Cedula:");
+        jLabel3.setText("Cédula:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 70, 30));
 
         lblErrorFechaNac.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        lblErrorFechaNac.setText("Ingrese una fecha correcta.");
-        jPanel1.add(lblErrorFechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 290, 200, 20));
+        lblErrorFechaNac.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblErrorFechaNac.setText("Ingrese una fecha correcta. (dd/mm/aaaa)");
+        jPanel1.add(lblErrorFechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 240, 20));
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -277,7 +277,7 @@ public class PersonaFrmUI extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel6.setText("Telefono:");
+        jLabel6.setText("Teléfono:");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 70, 30));
 
         txtTelefono.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -311,19 +311,19 @@ public class PersonaFrmUI extends javax.swing.JFrame {
         jPanel1.add(btnrFemenino, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, -1, -1));
 
         lblErrorCedula.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        lblErrorCedula.setText("Solo debe contener numeros.");
+        lblErrorCedula.setText("Ingrese una cédula correcta.");
         jPanel1.add(lblErrorCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 190, 20));
 
         lblErrorNombre.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        lblErrorNombre.setText("Solo debe ingresar letras.");
+        lblErrorNombre.setText("Sólo debe ingresar letras.");
         jPanel1.add(lblErrorNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 190, 20));
 
         lblErrorApellido.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        lblErrorApellido.setText("Solo debe ingresar letras.");
+        lblErrorApellido.setText("Sólo debe ingresar letras.");
         jPanel1.add(lblErrorApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 200, 20));
 
         lblErrorTelefono.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        lblErrorTelefono.setText("Solo debe ingresar numeros.");
+        lblErrorTelefono.setText("Ingrese un teléfono correcto.");
         jPanel1.add(lblErrorTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 190, 20));
 
         jLabel14.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
@@ -332,7 +332,7 @@ public class PersonaFrmUI extends javax.swing.JFrame {
         jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(205, 260, 15, 30));
 
         lblErrorSueldo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        lblErrorSueldo.setText("Solo debe ingresar numeros.");
+        lblErrorSueldo.setText("Sólo debe ingresar números.");
         jPanel1.add(lblErrorSueldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, 190, 20));
 
         jLabel16.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
