@@ -5,6 +5,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -57,6 +58,10 @@ public class PersonaUI extends javax.swing.JFrame {
     public JPanel getPnlFondo() {
         return pnlFondo;
     }
+
+    public JScrollPane getScrollTblPersona() {
+        return scrollTblPersona;
+    }
     
     
 
@@ -84,13 +89,12 @@ public class PersonaUI extends javax.swing.JFrame {
         btnNuevo = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        scrollTblPersona = new javax.swing.JScrollPane();
         tblPersonas = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(642, 482));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(642, 482));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -237,9 +241,9 @@ public class PersonaUI extends javax.swing.JFrame {
                 "Cedula", "Nombre", "Apellido"
             }
         ));
-        jScrollPane1.setViewportView(tblPersonas);
+        scrollTblPersona.setViewportView(tblPersonas);
 
-        pnlPrincipal.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 620, 310));
+        pnlPrincipal.add(scrollTblPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 620, 310));
 
         pnlFondo.add(pnlPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 31, 640, 450));
 
@@ -284,11 +288,11 @@ public class PersonaUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblMensaje;
     private javax.swing.JPanel pnlFondo;
     private javax.swing.JPanel pnlHeader;
     private javax.swing.JPanel pnlPrincipal;
+    private javax.swing.JScrollPane scrollTblPersona;
     private javax.swing.JTable tblPersonas;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables

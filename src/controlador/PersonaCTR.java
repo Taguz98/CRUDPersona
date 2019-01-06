@@ -5,6 +5,14 @@
  */
 package controlador;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import modelo.PersonaDB;
+import modelo.PersonaMD;
 import modelo.estilo.BtnHover;
 import modelo.estilo.VtnBorde;
 import vista.PersonaElimUI;
@@ -16,51 +24,160 @@ import vista.PersonaUI;
  * @author Usuario
  */
 public class PersonaCTR {
-    
+
     private final PersonaUI vtnPersona;
-    
-    public PersonaCTR(PersonaUI vtnPersona){
+    private final PersonaDB persona;
+    //El modelo de la tabla personas 
+    private DefaultTableModel mdTblPersona;
+
+    public PersonaCTR(PersonaUI vtnPersona, PersonaDB persona) {
         this.vtnPersona = vtnPersona;
-        vtnPersona.setVisible(true); 
+        this.persona = persona;
+        //Mostramos la ventana
+        vtnPersona.setVisible(true);
     }
-    
-    public void iniciar(){ 
+
+    public void iniciar() {
+        //Inciamos el modelo de tabla personas 
+        String titulo[] = {"id", "Cedula", "Nombre", "Apellido", "Sueldo", "Sexo"};
+        String datos[][] = {};
+        mdTblPersona = new DefaultTableModel(datos, titulo);
+        //Le pasamos el modelo a la tabla  
+        vtnPersona.getTblPersonas().setModel(mdTblPersona);
+
         //Le pasamos las animaciones a todos los botones 
         vtnPersona.getBtnActualizar().addMouseListener(new BtnHover(vtnPersona.getBtnActualizar()));
         vtnPersona.getBtnEditar().addMouseListener(new BtnHover(vtnPersona.getBtnEditar()));
         vtnPersona.getBtnEliminar().addMouseListener(new BtnHover(vtnPersona.getBtnEliminar()));
         vtnPersona.getBtnNuevo().addMouseListener(new BtnHover(vtnPersona.getBtnNuevo()));
-        
+
         //Le agregamos la animacion del borde de la ventana
         vtnPersona.addWindowFocusListener(new VtnBorde(vtnPersona.getPnlFondo()));
-        
+
+        //Creamos el evento de escucha para el buscados  
+        KeyListener kl = new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                buscar(vtnPersona.getTxtBuscar().getText());
+            }
+        };
+        //Le asignamos el escucha al txt buscar  
+        vtnPersona.getTxtBuscar().addKeyListener(kl);
+
         //Le daremos funcionamiento a los botones  
         vtnPersona.getBtnNuevo().addActionListener(e -> nueva());
         vtnPersona.getBtnEditar().addActionListener(e -> editar());
-        vtnPersona.getBtnEliminar().addActionListener(e -> eliminar()); 
+        vtnPersona.getBtnEliminar().addActionListener(e -> eliminar());
+        vtnPersona.getBtnActualizar().addActionListener(e -> cargarPersonas());
+
+        MouseListener ml = new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("Se clickeo");
+                vtnPersona.getScrollTblPersona().setSize(620, 270);
+                vtnPersona.getTblPersonas().setSize(620, 270);
+                int fila = vtnPersona.getTblPersonas().getSelectedRow();
+                if (fila > 0) {
+                    System.out.println("Esta selecionada una fila");
+                } else {
+                    vtnPersona.getScrollTblPersona().setSize(620, 310);
+                    vtnPersona.getTblPersonas().setSize(620, 310);
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        };
+
+        //Le agregamos un action listener a la tabla para ver que fila seleciono  
+        vtnPersona.getTblPersonas().addMouseListener(ml);
+
+        cargarPersonas();
     }
-    
+
+    public void cargarPersonas() {
+        mdTblPersona.setRowCount(0);
+        ArrayList<PersonaMD> personas = persona.cargarPersonas();
+        //Cargamos todos los datos a la tabla personas 
+        for (PersonaMD per : personas) {
+            Object valores[] = {per.getId(), per.getCedula(), per.getNombre(),
+                per.getApellido(), per.getSueldo(), per.getSexo()};
+            mdTblPersona.addRow(valores);
+        }
+    }
+
+    public void buscar(String aguja) {
+        mdTblPersona.setRowCount(0);
+        ArrayList<PersonaMD> personas = persona.cargarPersonas(aguja);
+        //Cargamos todos los datos a la tabla  
+        for (PersonaMD per : personas) {
+            Object valores[] = {per.getId(), per.getCedula(), per.getNombre(),
+                per.getApellido(), per.getSueldo(), per.getSexo()};
+            mdTblPersona.addRow(valores);
+        }
+    }
+
     //Con este metodo iniciaremos el controlador para ingresar una nueva persona
-    public void nueva(){
-        PersonaFrmUI frmPer = new PersonaFrmUI(); 
-        NuevaCTR nv = new NuevaCTR(frmPer, vtnPersona);
+    public void nueva() {
+        PersonaFrmUI frmPer = new PersonaFrmUI();
+        NuevaCTR nv = new NuevaCTR(frmPer, vtnPersona, persona);
         nv.iniciar();
     }
-    
+
     //Con este metodo eliminaremos a la persona seleccionada 
-    public void eliminar(){ 
-        PersonaElimUI elimPer = new PersonaElimUI(); 
-        EliminarCTR elm = new EliminarCTR(elimPer, vtnPersona);
-        elm.iniciar();
-        
+    public void eliminar() {
+        int fila = vtnPersona.getTblPersonas().getSelectedRow();
+        if (fila >= 0) {
+            String id = vtnPersona.getTblPersonas().getValueAt(fila, 0).toString();
+            PersonaElimUI elimPer = new PersonaElimUI();
+            EliminarCTR elm = new EliminarCTR(elimPer, vtnPersona, persona, id);
+            elm.iniciar();
+        } else {
+            vtnPersona.getLblMensaje().setText("No se puede eliminar.");
+        }
+
     }
-    
+
     //Con este metodo editaremos a la persona selecciona
-    public void editar(){
-        PersonaFrmUI frmPer = new PersonaFrmUI(); 
-        EditarCTR ed = new EditarCTR(frmPer, vtnPersona); 
-        ed.iniciar();
+    public void editar() {
+        int fila = vtnPersona.getTblPersonas().getSelectedRow();
+
+        if (fila >= 0) {
+            //Seleciono el valor de id de la fila selecionada
+            String id = vtnPersona.getTblPersonas().getValueAt(fila, 0).toString();
+            PersonaFrmUI frmPer = new PersonaFrmUI();
+            EditarCTR ed = new EditarCTR(frmPer, vtnPersona, persona, id);
+            ed.iniciar();
+        } else {
+            vtnPersona.getLblMensaje().setText("No se puede editar.");
+        }
     }
-    
-    
+
 }

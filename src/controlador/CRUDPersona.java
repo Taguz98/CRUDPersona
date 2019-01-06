@@ -1,6 +1,7 @@
 
 package controlador;
 
+import modelo.PersonaDB;
 import vista.PersonaUI;
 
 /**
@@ -13,8 +14,9 @@ public class CRUDPersona {
         estiloVentana();
         
         PersonaUI per = new PersonaUI(); 
+        PersonaDB personas = new PersonaDB(); 
         
-        PersonaCTR ctrPer = new PersonaCTR(per); 
+        PersonaCTR ctrPer = new PersonaCTR(per, personas); 
         ctrPer.iniciar();
         
     }
