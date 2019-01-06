@@ -46,16 +46,18 @@ public class NuevaCTR {
 
     public void guardar() {
         boolean guardar = true;
-        String anio = frmPersona.getTxtAnio().getText();
-        String apellido = frmPersona.getTxtApellido().getText();
-        String cedula = frmPersona.getTxtCedula().getText();
-        String dia = frmPersona.getTxtDia().getText();
-        String mes = frmPersona.getTxtMes().getText();
-        String nombre = frmPersona.getTxtNombre().getText();
-        String sueldo = frmPersona.getTxtSueldo().getText();
-        String telefono = frmPersona.getTxtTelefono().getText();
+        String anio = frmPersona.getTxtAnio().getText().trim();
+        String apellido = frmPersona.getTxtApellido().getText().trim();
+        String cedula = frmPersona.getTxtCedula().getText().trim();
+        String dia = frmPersona.getTxtDia().getText().trim();
+        String mes = frmPersona.getTxtMes().getText().trim();
+        String nombre = frmPersona.getTxtNombre().getText().trim();
+        String sueldo = frmPersona.getTxtSueldo().getText().trim();
+        String telefono = frmPersona.getTxtTelefono().getText().trim();
         char sexo;
-
+        
+        LocalDate HOY = LocalDate.now();
+        
         if (frmPersona.getBtnrFemenino().isSelected()) {
             sexo = 'F';
         } else {
@@ -66,6 +68,8 @@ public class NuevaCTR {
             guardar = false;
             frmPersona.getLblErrorFechaNac().setVisible(true);
             frmPersona.getTxtAnio().setBorder(BorderFactory.createLineBorder(new Color(170, 0, 0), 1));
+        }else if(Integer.parseInt(anio) - 5 > HOY.getYear()){
+            frmPersona.getTxtAnio().setBorder(BorderFactory.createLineBorder(new Color(170, 0, 0), 1));
         }else{
             frmPersona.getTxtAnio().setBorder(BorderFactory.createLineBorder(new Color(171, 173, 179), 1));
         }
@@ -73,6 +77,8 @@ public class NuevaCTR {
         if (!Validar.esLetras(apellido)) {
             guardar = false;
             frmPersona.getLblErrorApellido().setVisible(true);
+            frmPersona.getTxtApellido().setBorder(BorderFactory.createLineBorder(new Color(170, 0, 0), 1));
+        }else if(apellido.length() > 25){
             frmPersona.getTxtApellido().setBorder(BorderFactory.createLineBorder(new Color(170, 0, 0), 1));
         }else{
             frmPersona.getTxtApellido().setBorder(BorderFactory.createLineBorder(new Color(171, 173, 179), 1));
@@ -105,6 +111,8 @@ public class NuevaCTR {
         if (!Validar.esLetras(nombre)) {
             guardar = false;
             frmPersona.getLblErrorNombre().setVisible(true);
+            frmPersona.getTxtNombre().setBorder(BorderFactory.createLineBorder(new Color(170, 0, 0), 1));
+        }else if(nombre.length() > 25){
             frmPersona.getTxtNombre().setBorder(BorderFactory.createLineBorder(new Color(170, 0, 0), 1));
         }else{
             frmPersona.getTxtNombre().setBorder(BorderFactory.createLineBorder(new Color(171, 173, 179), 1));

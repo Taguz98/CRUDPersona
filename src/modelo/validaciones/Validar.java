@@ -44,7 +44,7 @@ public class Validar {
     }
 
     public static boolean esDinero(String cadena) {
-        return cadena.matches("[0-9]+");
+        return cadena.matches("[0-9\\.]+"); 
     }
 
     public static boolean esCedula(String cadena) {
