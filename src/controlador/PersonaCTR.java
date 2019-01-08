@@ -121,6 +121,7 @@ public class PersonaCTR {
         MouseListener ml = new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                /*
                 System.out.println("Se clickeo");
                 vtnPersona.getScrollTblPersona().setSize(620, 270);
                 vtnPersona.getTblPersonas().setSize(620, 270);
@@ -130,12 +131,13 @@ public class PersonaCTR {
                 } else {
                     vtnPersona.getScrollTblPersona().setSize(620, 310);
                     vtnPersona.getTblPersonas().setSize(620, 310);
-                }
+                }*/
+                mostrarBtns();
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
-
+                mostrarBtns();
             }
 
             @Override
@@ -156,7 +158,11 @@ public class PersonaCTR {
 
         //Le agregamos un action listener a la tabla para ver que fila seleciono  
         vtnPersona.getTblPersonas().addMouseListener(ml);
-
+        
+        //Ocultamos los botones  
+        vtnPersona.getBtnEditar().setVisible(false);
+        vtnPersona.getBtnEliminar().setVisible(false);
+        
         cargarPersonas();
     }
 
@@ -268,6 +274,15 @@ public class PersonaCTR {
             ed.iniciar();
         } else {
             vtnPersona.getLblMensaje().setText("No se puede editar.");
+        }
+    }
+    
+    //Mostrar los botones  
+    public void mostrarBtns(){
+        int fila = vtnPersona.getTblPersonas().getSelectedRow();
+        if (fila >= 0) {    
+        vtnPersona.getBtnEditar().setVisible(true);
+        vtnPersona.getBtnEliminar().setVisible(true);
         }
     }
 

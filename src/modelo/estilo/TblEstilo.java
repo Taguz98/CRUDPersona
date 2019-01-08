@@ -13,7 +13,7 @@ import javax.swing.table.TableColumnModel;
  * @author Usuario
  */
 public class TblEstilo {
-    //Pa ocultar las id de la tbl 
+    //Para ocultar las id de la tbl 
     public static void ocultarID(JTable tbl){ 
         TableColumnModel mdColum = tbl.getColumnModel(); 
         
@@ -50,8 +50,7 @@ public class TblEstilo {
         tbl.setFont(new Font("Arial", Font.PLAIN, 12));
         tbl.setRowHeight(25);
         tbl.setShowVerticalLines(false);
-        tbl.setShowHorizontalLines(false);
-        
+        tbl.setShowHorizontalLines(false);  
     }
     
 }
